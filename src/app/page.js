@@ -2,6 +2,7 @@
 import Viewer from "./viewer";
 import { useState, useEffect } from "react";
 import HyperDX from "@hyperdx/browser";
+import { ErrorBoundary } from "react-error-boundary";
 
 export default function Home() {
   const [pdf, setPdf] = useState(null);
@@ -10,10 +11,15 @@ export default function Home() {
   HyperDX.init({
     apiKey: "1ece8908-dc30-4cd6-b822-69f89a0106c6",
     service: "PSPDFKit Web Best Practices",
-    tracePropagationTargets: [], // [/api.myapp.domain/i], Set to link traces from frontend to backend requests
+    tracePropagationTargets: ["pspdfkit-web-cdn-preloadworker.vercel.app"], // [/api.myapp.domain/i], Set to link traces from frontend to backend requests
     consoleCapture: true, // Capture console logs (default false)
     advancedNetworkCapture: true, // Capture full HTTP request/response headers and bodies (default false)
   });
+
+  // Import your ErrorBoundary (we're using react-error-boundary as an example)
+  // This will hook into the ErrorBoundary component and capture any errors that occur
+  // within any instance of it.
+  HyperDX.attachToReactErrorBoundary(ErrorBoundary);
 
   return (
     <div>
