@@ -23,7 +23,11 @@ export default function Viewer({ document }) {
         container,
         baseUrl: pspdfkitBaseUrl,
         styleSheets: ["/pspdfkit.css"],
+        ProcessorEngine: "fasterProcessing",
+        // https://pspdfkit.com/api/web/PSPDFKit.html#.ProcessorEngine
       };
+
+      const officeExtensions = ["doc", "docx", "xls", "xlsx", "ppt", "pptx"];
 
       PSPDFKit.unload(container);
 
@@ -32,15 +36,46 @@ export default function Viewer({ document }) {
         PSPDFKit.preloadWorker(pspdfkitConfig);
         console.timeEnd("preloadWorker");
       } else {
-        console.time(document + " loading time");
-        PSPDFKit.load({
-          ...pspdfkitConfig,
-          document: document,
-        }).then((instance) => {
-          // Use PSPDFKit SDK instance
-          // Add event listeners, etc.
-          console.timeEnd(document + " loading time");
-        });
+        const extension = document.split(".").pop();
+
+        if (officeExtensions.includes(extension)) {
+          console.time(document + " conversion time");
+          // explicitly convert the Office document to PDF for better performance
+          // https://pspdfkit.com/api/web/PSPDFKit.html#.convertToPDF
+          PSPDFKit.convertToPDF(
+            {
+              ...pspdfkitConfig,
+              document: document,
+            },
+            PSPDFKit.Conformance.PDFA_1A
+          )
+            .then((arrayBuffer) => {
+              console.time(document + " loading time");
+
+              PSPDFKit.load({
+                ...pspdfkitConfig,
+                document: arrayBuffer,
+              }).then((instance) => {
+                // Use PSPDFKit SDK instance
+                // Add event listeners, etc.
+                console.timeEnd(document + " loading time");
+              });
+            })
+            .catch((error) => {
+              console.error(error.message);
+            });
+          console.timeEnd(document + " conversion time");
+        } else {
+          console.time(document + " loading time");
+          PSPDFKit.load({
+            ...pspdfkitConfig,
+            document: document,
+          }).then((instance) => {
+            // Use PSPDFKit SDK instance
+            // Add event listeners, etc.
+            console.timeEnd(document + " loading time");
+          });
+        }
       }
     }
   }, [document, pspdfkitBaseUrl]);

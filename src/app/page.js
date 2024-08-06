@@ -1,10 +1,19 @@
 "use client";
 import Viewer from "./viewer";
 import { useState, useEffect } from "react";
+import HyperDX from "@hyperdx/browser";
 
 export default function Home() {
   const [pdf, setPdf] = useState(null);
   const borderColor = "#c1c4c8"; // gray-ish
+
+  HyperDX.init({
+    apiKey: "1ece8908-dc30-4cd6-b822-69f89a0106c6",
+    service: "PSPDFKit Web Best Practices",
+    tracePropagationTargets: [], // [/api.myapp.domain/i], Set to link traces from frontend to backend requests
+    consoleCapture: true, // Capture console logs (default false)
+    advancedNetworkCapture: true, // Capture full HTTP request/response headers and bodies (default false)
+  });
 
   return (
     <div>
@@ -74,9 +83,9 @@ export default function Home() {
             </button>
             <button
               className="block py-2 px-3 bg-sky-500/100 text-white text-sm font-semibold rounded-md shadow focus:outline-none"
-              onClick={() => setPdf("./sampledocs-50mb-xls-file.xls")}
+              onClick={() => setPdf("./100000-sales-records.xlsx")}
             >
-              Excel Document (52.2MB)
+              100,000 Sales Records - xls (8.4MB)
             </button>
           </div>
         </div>
