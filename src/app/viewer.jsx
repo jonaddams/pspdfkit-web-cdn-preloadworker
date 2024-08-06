@@ -37,7 +37,6 @@ export default function Viewer({ document }) {
         console.timeEnd("preloadWorker");
       } else {
         const extension = document.split(".").pop();
-
         if (officeExtensions.includes(extension)) {
           console.time(document + " conversion time");
           // explicitly convert the Office document to PDF for better performance

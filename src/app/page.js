@@ -43,7 +43,7 @@ export default function Home() {
               className="block py-2 px-3 bg-sky-500/100 text-white text-sm font-semibold rounded-md shadow focus:outline-none"
               onClick={() => setPdf("./danish-magazine.pdf")}
             >
-              Danish Magazine (12.9MB)
+              PDF/UA Danish Magazine (12.9MB)
             </button>
             <button
               className="block py-2 px-3 bg-sky-500/100 text-white text-sm font-semibold rounded-md shadow focus:outline-none"
@@ -59,7 +59,7 @@ export default function Home() {
             </button>
             <button
               className="block py-2 px-3 bg-sky-500/100 text-white text-sm font-semibold rounded-md shadow focus:outline-none"
-              onClick={() => setPdf("./SampleDocs-sales-sample-data.docx")}
+              onClick={() => setPdf("./sales-sample-data.docx")}
             >
               Word Document (2.3MB)
             </button>
@@ -71,27 +71,27 @@ export default function Home() {
             </button>
             <button
               className="block py-2 px-3 bg-sky-500/100 text-white text-sm font-semibold rounded-md shadow focus:outline-none"
-              onClick={() => setPdf("./SampleXLSFile_1736kb.xls")}
+              onClick={() => setPdf("./0001000-sales-records.xlsx")}
             >
-              Excel Document (1.8MB)
+              1,000 Sales Records - xls (91KB)
             </button>
             <button
               className="block py-2 px-3 bg-sky-500/100 text-white text-sm font-semibold rounded-md shadow focus:outline-none"
-              onClick={() => setPdf("./SampleDocs-Superstore Data.xls")}
+              onClick={() => setPdf("./0010000-sales-records.xlsx")}
             >
-              Excel Document (3.4MB)
+              10,000 Sales Records - xls (849KB)
             </button>
             <button
               className="block py-2 px-3 bg-sky-500/100 text-white text-sm font-semibold rounded-md shadow focus:outline-none"
-              onClick={() => setPdf("./SampleXLSFile_6800kb.xls")}
-            >
-              Excel Document (7MB)
-            </button>
-            <button
-              className="block py-2 px-3 bg-sky-500/100 text-white text-sm font-semibold rounded-md shadow focus:outline-none"
-              onClick={() => setPdf("./100000-sales-records.xlsx")}
+              onClick={() => setPdf("./0100000-sales-records.xlsx")}
             >
               100,000 Sales Records - xls (8.4MB)
+            </button>
+            <button
+              className="block py-2 px-3 bg-sky-500/100 text-white text-sm font-semibold rounded-md shadow focus:outline-none"
+              onClick={() => setPdf("./1000000-sales-records.xlsx")}
+            >
+              1,000,000 Sales Records - xls (82.2MB)
             </button>
           </div>
         </div>
